@@ -1,26 +1,15 @@
-# import os
-# import mysql.connector
-
-# def get_db():
-#     return mysql.connector.connect(
-#         host=os.getenv("MYSQL_HOST"),
-#         user=os.getenv("MYSQL_USER"),
-#         password=os.getenv("MYSQL_PASSWORD"),
-#         database=os.getenv("MYSQL_DATABASE"),
-#         port=int(os.getenv("MYSQL_PORT", 3306)),
-#     )
-
 import os
 import mysql.connector
 
 def get_db():
     return mysql.connector.connect(
-        host=os.getenv("MYSQLHOST"),
-        user=os.getenv("MYSQLUSER"),
-        password=os.getenv("MYSQLPASSWORD"),
-        database=os.getenv("MYSQLDATABASE"),
+        host=os.getenv("MYSQLHOST", "localhost"),
+        user=os.getenv("MYSQLUSER", "root"),
+        password=os.getenv("MYSQLPASSWORD", "123456789@"),
+        database=os.getenv("MYSQLDATABASE", "voter_ocr_db"),
         port=int(os.getenv("MYSQLPORT", 3306))
     )
+
 
 # # import mysql.connector
 

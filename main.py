@@ -29,6 +29,12 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Shared in-memory dictionary to track job progress
 db_status = {}
+@app.get("/db-test")
+def db_test():
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT 1")
+    return {"db": "connected"}
 
 # ============================
 # BACKGROUND OCR TASK
