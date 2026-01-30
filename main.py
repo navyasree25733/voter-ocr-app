@@ -141,37 +141,68 @@ def logout(request: Request):
 # ============================
 # OCR & DASHBOARD ROUTES
 # ============================
+# @app.get("/dashboard")
+# async def dashboard(request: Request):
+#     user= request.session.get("user")
+#     if not user:
+#         return RedirectResponse("/login")
+
+#     # 1. NEW: Fetch current user data from the database
+#     conn = get_db()
+#     cursor = conn.cursor(dictionary=True)
+#     cursor.execute(
+#         "SELECT full_name, avatar_url FROM users WHERE email = %s", 
+#         (user,)
+#     )
+#     user_data = cursor.fetchone()
+#     cursor.close()
+#     conn.close()
+
+#     # 2. Your existing logic for recent jobs
+#     sorted_jobs = sorted(
+#         db_status.items(), 
+#         key=lambda x: x[1].get('timestamp', datetime.min), 
+#         reverse=True
+#     )[:5]
+#     recent_jobs = dict(sorted_jobs)
+
+#     # 3. PASS THE 'user' OBJECT TO THE HTML
+#     return templates.TemplateResponse("dashboard.html", {
+#         "request": request, 
+#         "jobs": recent_jobs,
+#         "user": user_data  # <--- This allows {{ user.full_name }} to work
+#     })
 @app.get("/dashboard")
 async def dashboard(request: Request):
-    user= request.session.get("user")
+    user = request.session.get("user")
     if not user:
-        return RedirectResponse("/login")
+        return RedirectResponse("/login", status_code=303)
 
-    # 1. NEW: Fetch current user data from the database
     conn = get_db()
     cursor = conn.cursor(dictionary=True)
     cursor.execute(
-        "SELECT full_name, avatar_url FROM users WHERE email = %s", 
+        "SELECT full_name, avatar_url FROM users WHERE email = %s",
         (user,)
     )
     user_data = cursor.fetchone()
     cursor.close()
     conn.close()
 
-    # 2. Your existing logic for recent jobs
     sorted_jobs = sorted(
-        db_status.items(), 
-        key=lambda x: x[1].get('timestamp', datetime.min), 
+        db_status.items(),
+        key=lambda x: x[1].get("timestamp", datetime.min),
         reverse=True
     )[:5]
     recent_jobs = dict(sorted_jobs)
 
-    # 3. PASS THE 'user' OBJECT TO THE HTML
-    return templates.TemplateResponse("dashboard.html", {
-        "request": request, 
-        "jobs": recent_jobs,
-        "user": user_data  # <--- This allows {{ user.full_name }} to work
-    })
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {
+            "request": request,
+            "jobs": recent_jobs,
+            "user": user_data or {"full_name": user, "avatar_url": None},
+        }
+    )
 
 # ============================
 # upload
