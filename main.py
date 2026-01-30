@@ -143,8 +143,8 @@ def logout(request: Request):
 # ============================
 @app.get("/dashboard")
 async def dashboard(request: Request):
-    user_email = request.session.get("user")
-    if not user_email:
+    user= request.session.get("user")
+    if not user:
         return RedirectResponse("/login")
 
     # 1. NEW: Fetch current user data from the database
@@ -152,7 +152,7 @@ async def dashboard(request: Request):
     cursor = conn.cursor(dictionary=True)
     cursor.execute(
         "SELECT full_name, avatar_url FROM users WHERE email = %s", 
-        (user_email,)
+        (user,)
     )
     user_data = cursor.fetchone()
     cursor.close()
