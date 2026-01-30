@@ -1,3 +1,4 @@
+import pytesseract
 import os
 import uuid
 import pandas as pd
@@ -19,6 +20,8 @@ from db import get_db  # Using your db.py with get_db()
 # from workshop import secure_filename
 import itsdangerous
 from starlette.middleware.sessions import SessionMiddleware
+if os.name != "nt":  # not Windows
+    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 app = FastAPI()
 
