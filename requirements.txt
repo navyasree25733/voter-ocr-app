@@ -13,3 +13,5 @@ python-dotenv
 itsdangerous
 opencv-python-headless
 pytesseract
+passlib[argon2,bcrypt]
+bcrypt

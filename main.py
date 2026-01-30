@@ -102,11 +102,14 @@ def login_user(request: Request, email: str = Form(...), password: str = Form(..
     cursor.close()
     conn.close()
 
-    if not user or not verify_password(password, user['password_hash']):
-        return templates.TemplateResponse("login.html", {
-            "request": request, "error": "Invalid email or password"
-        })
-
+    # if not user or not verify_password(password, user['password_hash']):
+    #     return templates.TemplateResponse("login.html", {
+    #         "request": request, "error": "Invalid email or password"
+    #     })
+    if not user:
+        return templates.TemplateResponse("login.html", {"request": request, "error": "User not found"})
+    if not verify_password(password, user["password_hash"]):
+        return templates.TemplateResponse("login.html", {"request": request, "error": "Wrong password"})
     request.session["user"] = user['email']
     return RedirectResponse("/dashboard", status_code=303)
 
