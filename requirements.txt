@@ -7,17 +7,9 @@ openpyxl
 mysql-connector-python
 pdf2image
 pillow
-# passlib[bcrypt]
 passlib
 argon2-cffi
-
 python-dotenv
-
-# Session support
 itsdangerous
-
-# OpenCV (SERVER SAFE)
 opencv-python-headless
-
-# OCR
 pytesseract
