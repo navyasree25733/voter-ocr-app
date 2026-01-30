@@ -1,6 +1,6 @@
 FROM python:3.13-slim
 
-# Install system dependencies
+# Install system dependencies (OCR + PDF support)
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     poppler-utils \
@@ -14,5 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# IMPORTANT: shell form so $PORT works
 CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}
