@@ -8,10 +8,10 @@ mysql-connector-python
 pdf2image
 pillow
 passlib
-argon2-cffi
+
 python-dotenv
 itsdangerous
 opencv-python-headless
 pytesseract
-passlib[argon2,bcrypt]
-bcrypt
+passlib[argon2]
+argon2-cffi
