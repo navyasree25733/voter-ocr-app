@@ -5,8 +5,16 @@ python-multipart
 pandas
 openpyxl
 mysql-connector-python
-passlib[bcrypt]
-python-dotenv
 pdf2image
 pillow
+passlib[bcrypt]
+python-dotenv
+
+# Session support
 itsdangerous
+
+# OpenCV (SERVER SAFE)
+opencv-python-headless
+
+# OCR
+pytesseract
