@@ -18,11 +18,13 @@ from security import hash_password, verify_password
 from db import get_db  # Using your db.py with get_db()
 # from workshop import secure_filename
 import itsdangerous
+from starlette.middleware.sessions import SessionMiddleware
+
 app = FastAPI()
 
 # Session Middleware is crucial for the login system to remember users
 # app.add_middleware(SessionMiddleware, secret_key="super-secret-key-change-this")
-app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY"))
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("8b81fabe94d76a4766d1c27cc5b1776bb8dddb1922affa697efc9a76d50b597f"))
 templates = Jinja2Templates(directory="templates")
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
