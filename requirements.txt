@@ -7,7 +7,10 @@ openpyxl
 mysql-connector-python
 pdf2image
 pillow
-passlib[bcrypt]
+# passlib[bcrypt]
+passlib
+argon2-cffi
+
 python-dotenv
 
 # Session support
