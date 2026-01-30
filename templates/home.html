@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter OCR Pro | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    body.home-body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, #1e293b, #020617);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+            :root {
+  --bg-dark: #020617;
+  --bg-dark-alt: #0b1120;
+  --bg-light: #f1f5f9;
+  --bg-light-alt: #ffffff;
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+  --accent-strong: rgba(99, 102, 241, 0.9);
+  --text-light: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-dark: #111827;
+  --border-subtle: rgba(148, 163, 184, 0.3);
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.45);
+  --radius-xl: 1.5rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+  --transition-fast: 0.2s ease-out;
+  --transition-med: 0.3s ease;
+}
+
+/* Light theme overrides */
+body[data-theme="light"] {
+  --bg-dark: var(--bg-light);
+  --bg-dark-alt: var(--bg-light-alt);
+  --text-light: var(--text-dark);
+  --text-muted: #6b7280;
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.1);
+}
+
+/* Global styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #1d283a, #020617);
+  color: var(--text-light);
+  min-height: 100%;
+}
+
+body.auth-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s var(--transition-med);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Auth card layout (login / signup / forgot) */
+
+.auth-card {
+  background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.15), transparent),
+    var(--bg-dark-alt);
+  border-radius: 2rem;
+  box-shadow: var(--shadow-soft);
+  padding: 2.5rem 3rem;
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.auth-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo / header */
+
+.app-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.app-logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(from 160deg, #22c55e, #6366f1, #06b6d4, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
+}
+
+.app-logo-circle span {
+  background: #020617;
+  color: #e5e7eb;
+  width: 30px;
+  height: 30px;
+  border-radius: inherit;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-logo-text small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.app-logo-text strong {
+  font-size: 1.05rem;
+}
+
+/* Headings */
+
+.auth-title {
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem;
+}
+
+.auth-subtitle {
+  margin: 0 0 1.7rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Forms */
+
+.form-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.form-control,
+.form-select {
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text-light);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast), transform 0.1s ease-out;
+}
+
+body[data-theme="light"] .form-control,
+body[data-theme="light"] .form-select {
+  background: #f9fafb;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border-radius: 0.5rem;
+  accent-color: var(--accent);
+}
+
+/* Buttons */
+
+.btn-primary,
+.btn-ghost,
+.btn-outline,
+.btn-danger,
+.btn-soft {
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform 0.1s ease-out, box-shadow var(--transition-fast), background var(--transition-fast),
+    color var(--transition-fast), border var(--transition-fast);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #e5e7eb;
+  box-shadow: 0 18px 35px rgba(79, 70, 229, 0.45);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 45px rgba(79, 70, 229, 0.65);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  background: rgba(15, 23, 42, 0.7);
+  color: var(--text-light);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  color: var(--text-muted);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fecaca;
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.btn-soft {
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--text-light);
+}
+
+.btn-soft:hover {
+  background: rgba(148, 163, 184, 0.18);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Links */
+
+.text-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* Helper text / errors */
+
+.text-sm {
+  font-size: 0.8rem;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-error {
+  color: #fecaca;
+  font-size: 0.8rem;
+}
+
+/* Layout: Dashboard */
+
+.dashboard-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  background: radial-gradient(circle at top left, #1e293b, #020617);
+}
+
+.dashboard-sidebar {
+  background: rgba(15, 23, 42, 0.98);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem;
+  backdrop-filter: blur(20px);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.sidebar-brand-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand-title span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.sidebar-brand-title strong {
+  font-size: 1.05rem;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background var(--transition-fast), color var(--transition-fast), transform 0.08s ease-out;
+}
+
+.sidebar-nav a span.icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  font-size: 0.9rem;
+}
+
+.sidebar-nav a.active,
+.sidebar-nav a:hover {
+  background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.23), rgba(15, 23, 42, 0.95));
+  color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.sidebar-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-footer small {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Top bar */
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1.6rem;
+}
+
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.4rem;
+}
+
+.topbar-left h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.topbar-left p {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.search-shell {
+  position: relative;
+  min-width: 240px;
+}
+
+.search-shell input {
+  width: 100%;
+  padding: 0.6rem 0.9rem 0.6rem 2.2rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+.search-shell span.icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(from 160deg, #22c55e, #6366f1, #06b6d4);
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.profile-chip span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Main content */
+
+.dashboard-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* KPI cards */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 1rem 1rem;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.75);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.35), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition-med);
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.card-kpi-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.card-kpi-value {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.card-kpi-chip {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.card-footer {
+  margin-top: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Activity / charts layout */
+
+.grid-2cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.card-title-row h2 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.card-title-row small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.activity-list {
+  margin: 0.5rem 0 0;
+  list-style: none;
+  padding: 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.25);
+  font-size: 0.8rem;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-label {
+  color: var(--text-light);
+}
+
+.activity-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+  white-space: nowrap;
+}
+
+.badge {
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+}
+
+.badge.success {
+  background: rgba(34, 197, 94, 0.16);
+  color: #bbf7d0;
+}
+
+.badge.danger {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fecaca;
+}
+
+.badge.info {
+  background: rgba(59, 130, 246, 0.18);
+  color: #bfdbfe;
+}
+
+/* Tables */
+
+.table-shell {
+  width: 100%;
+  margin-top: 0.6rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.table-responsive {
+  max-height: 360px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+th,
+td {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.96);
+}
+
+tbody tr:hover {
+  background: rgba(30, 64, 175, 0.32);
+}
+
+/* Pills / small UI bits */
+
+.pill {
+  padding: 0.18rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: var(--text-muted);
+}
+
+/* Forms pages (upload/profile/settings) */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.page-header p {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.section-card {
+  margin-top: 0.7rem;
+}
+
+/* Upload area */
+
+.upload-dropzone {
+  margin-top: 0.8rem;
+  padding: 1.4rem 1.2rem;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.16), transparent 60%);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.upload-dropzone input[type="file"] {
+  display: none;
+}
+
+/* Profile avatar */
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.profile-avatar-lg {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(from 160deg, #22c55e, #6366f1, #06b6d4);
+  color: #f9fafb;
+  font-size: 2.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.profile-avatar-lg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.profile-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Theme switch */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.theme-toggle span {
+  font-size: 0.95rem;
+}
+
+/* Chips / tags */
+
+.tag {
+  font-size: 0.7rem;
+  padding: 0.18rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* Modals */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  backdrop-filter: blur(12px);
+}
+
+.modal-backdrop.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg-dark-alt);
+  border-radius: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  max-width: 420px;
+  width: 100%;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.modal-body {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+
+@media (max-width: 960px) {
+  .dashboard-shell {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .sidebar-brand-title {
+    display: none;
+  }
+
+  .sidebar-nav a span.label {
+    display: none;
+  }
+
+  .search-shell {
+    display: none;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-2cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  body.auth-body {
+    padding: 1.5rem;
+  }
+
+  .auth-card {
+    padding: 1.8rem 1.7rem;
+  }
+
+  .kpi-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-sidebar {
+    display: none;
+  }
+
+  .dashboard-main {
+    padding: 1rem;
+  }
+}
+/* Ensure the detail view doesn't break out of the flex container */
+.dashboard-content {
+    display: block !important; /* Overriding flex to allow vertical scroll */
+    width: 100%;
+}
+
+/* Custom scrollbar for the table area */
+.overflow-x-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 #0f172a;
+}
+
+/* Prevent text links from having default underlines in the header */
+.no-print a { text-decoration: none !important; }
+
+@media print {
+    .no-print, .dashboard-sidebar {
+        display: none !important;
+    }
+    .dashboard-shell {
+        display: block;
+    }
+    .dashboard-main {
+        padding: 0;
+    }
+}
+
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-200 font-sans">
+
+    <nav class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-violet-600 p-2 rounded-lg shadow-[0_0_15px_rgba(124,58,237,0.5)]">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-extrabold text-white">
+                        Voter OCR <span class="text-violet-400">Pro</span>
+                    </span>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="/login"
+                        class="px-5 py-2 rounded-xl border border-slate-700 text-slate-300 font-bold hover:bg-slate-800 transition">
+                        Login
+                    </a>
+                    <a href="/signup"
+                        class="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 transition shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-14 items-center">
+        <div>
+            <h1 class="text-5xl font-black text-white leading-tight">
+                Automated <span class="text-violet-400">Data Extraction</span><br>
+                Made Simple
+            </h1>
+            <p class="mt-6 text-lg text-slate-400 max-w-xl">
+                Upload scanned PDFs and extract structured information.
+                Faster processing, high accuracy, and Excel-ready outputs.
+            </p>
+
+            <div class="mt-8 flex gap-4">
+                <a href="/signup"
+                    class="px-8 py-4 bg-violet-600 text-white font-extrabold rounded-2xl btn-primary shadow-lg hover:bg-violet-500 transition transform hover:-translate-y-1">
+                    Get Started
+                </a>
+            </div>
+        </div>
+
+        <div class="relative">
+            <div class="absolute inset-0 bg-violet-600 rounded-full blur-[100px] opacity-20"></div>
+            <img src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png"
+                alt="OCR Illustration"
+                class="relative w-full max-w-md mx-auto drop-shadow-[0_0_30px_rgba(124,58,237,0.3)] brightness-110">
+        </div>
+    </section>
+
+    <section class="bg-slate-900/50 py-24 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-black text-center text-white mb-12">
+                Why Choose Voter OCR Pro?
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl hover:border-violet-500/50 transition-all group">
+                    <h3 class="text-xl font-bold mb-3 text-violet-400 group-hover:text-violet-300 transition">Accurate OCR</h3>
+                    <p class="text-slate-400">
+                        Advanced OCR tuned for voter cards, multilingual support, and noisy scans.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl hover:border-violet-500/50 transition-all group">
+                    <h3 class="text-xl font-bold mb-3 text-violet-400 group-hover:text-violet-300 transition">Smart Parsing</h3>
+                    <p class="text-slate-400">
+                        Intelligent NLP logic extracts Name, Age, Gender, Address, and EPIC number.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl hover:border-violet-500/50 transition-all group">
+                    <h3 class="text-xl font-bold mb-3 text-violet-400 group-hover:text-violet-300 transition">Excel Export</h3>
+                    <p class="text-slate-400">
+                        Download clean, structured Excel files ready for analysis and reporting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-900/40 to-slate-950"></div>
+        <div class="relative max-w-3xl mx-auto text-center px-6">
+            <h2 class="text-4xl font-black mb-4 text-white">
+                Start Extracting Voter Data Today
+            </h2>
+            <p class="text-slate-300 text-lg mb-8">
+                Save hours of manual work and reduce errors with automated document intelligence.
+            </p>
+            <a href="/signup"
+                class="inline-block px-10 py-4 bg-amber-500 text-slate-950 font-extrabold rounded-2xl shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:bg-amber-400 transition transform hover:scale-105">
+                Create Free Account
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 py-10 text-center border-t border-slate-900">
+        <p class="text-slate-500 text-sm">
+            &copy; 2026 Voter OCR Extraction System | Built with OCR & NLP
+        </p>
+    </footer>
+
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter OCR Pro | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+    Navbar
+    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-blue-600 p-2 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-extrabold text-gray-900">
+                        Voter OCR <span class="text-blue-600">Pro</span>
+                    </span>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="/login"
+                        class="px-5 py-2 rounded-xl border border-gray-300 text-gray-700 font-bold hover:bg-gray-100 transition">
+                        Login
+                    </a>
+                    <a href="/signup"
+                        class="px-5 py-2 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-md">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    Hero Section
+    <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-14 items-center">
+        <div>
+            <h1 class="text-5xl font-black text-gray-900 leading-tight">
+                Automated <span class="text-blue-600">Voter Data Extraction</span><br>
+                Made Simple
+            </h1>
+            <p class="mt-6 text-lg text-gray-600 max-w-xl">
+                Upload scanned voter PDFs and extract structured voter information using OCR and NLP.
+                Faster processing, high accuracy, and Excel-ready outputs.
+            </p>
+
+            <div class="mt-8 flex gap-4">
+                <a href="/signup"
+                    class="px-8 py-4 bg-blue-600 text-white font-extrabold rounded-2xl shadow-lg hover:bg-blue-700 transition">
+                    Get Started
+                </a>
+                !-- <a href="/login"
+                    class="px-8 py-4 bg-white border border-gray-300 text-gray-700 font-bold rounded-2xl hover:bg-gray-100 transition">
+                    Login
+                </a> --
+            </div>
+        </div>
+
+        Illustration
+        <div class="relative">
+            <div class="absolute inset-0 bg-blue-100 rounded-3xl blur-3xl opacity-60"></div>
+            <img src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png"
+                alt="OCR Illustration"
+                class="relative w-full max-w-md mx-auto drop-shadow-xl">
+        </div>
+    </section>
+
+    Features
+    <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-black text-center text-gray-900 mb-12">
+                Why Choose Voter OCR Pro?
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 border rounded-2xl shadow-sm hover:shadow-md transition">
+                    <h3 class="text-xl font-bold mb-3 text-blue-600">Accurate OCR</h3>
+                    <p class="text-gray-600">
+                        Advanced OCR tuned for voter cards, multilingual support, and noisy scans.
+                    </p>
+                </div>
+
+                <div class="p-8 border rounded-2xl shadow-sm hover:shadow-md transition">
+                    <h3 class="text-xl font-bold mb-3 text-blue-600">Smart Parsing</h3>
+                    <p class="text-gray-600">
+                        Intelligent NLP logic extracts Name, Age, Gender, Address, and EPIC number.
+                    </p>
+                </div>
+
+                <div class="p-8 border rounded-2xl shadow-sm hover:shadow-md transition">
+                    <h3 class="text-xl font-bold mb-3 text-blue-600">Excel Export</h3>
+                    <p class="text-gray-600">
+                        Download clean, structured Excel files ready for analysis and reporting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    CTA
+    <section class="bg-blue-600 py-20">
+        <div class="max-w-3xl mx-auto text-center text-white">
+            <h2 class="text-4xl font-black mb-4">
+                Start Extracting Voter Data Today
+            </h2>
+            <p class="text-blue-100 text-lg mb-8">
+                Save hours of manual work and reduce errors with automated document intelligence.
+            </p>
+            <a href="/signup"
+                class="inline-block px-10 py-4 bg-white text-blue-600 font-extrabold rounded-2xl shadow-lg hover:bg-gray-100 transition">
+                Create Free Account
+            </a>
+        </div>
+    </section>
+
+    Footer
+    <footer class="bg-gray-100 py-6 text-center text-sm text-gray-500">
+        &copy; 2024 Voter OCR Extraction System | Built with OCR & NLP
+    </footer>
+
+</body>
+</html> -->

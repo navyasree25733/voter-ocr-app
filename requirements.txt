@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+jinja2
+python-multipart
+pandas
+openpyxl
+mysql-connector-python
+passlib[bcrypt]
+python-dotenv
+pdf2image
+pillow
