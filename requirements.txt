@@ -9,3 +9,4 @@ passlib[bcrypt]
 python-dotenv
 pdf2image
 pillow
+itsdangerous

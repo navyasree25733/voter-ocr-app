@@ -17,7 +17,7 @@ from datetime import datetime
 from security import hash_password, verify_password
 from db import get_db  # Using your db.py with get_db()
 # from workshop import secure_filename
-
+import itsdangerous
 app = FastAPI()
 
 # Session Middleware is crucial for the login system to remember users
