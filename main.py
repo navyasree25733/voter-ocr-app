@@ -24,7 +24,7 @@ app = FastAPI()
 
 # Session Middleware is crucial for the login system to remember users
 # app.add_middleware(SessionMiddleware, secret_key="super-secret-key-change-this")
-app.add_middleware(SessionMiddleware, secret_key=os.getenv("8b81fabe94d76a4766d1c27cc5b1776bb8dddb1922affa697efc9a76d50b597f"))
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("railway-test-secret-123456"))
 templates = Jinja2Templates(directory="templates")
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -108,7 +108,7 @@ def login_user(request: Request, email: str = Form(...), password: str = Form(..
         })
 
     request.session["user"] = user['email']
-    return RedirectResponse("/dashboard", status_code=302)
+    return RedirectResponse("/dashboard", status_code=303)
 
 @app.get("/signup")
 def signup_page(request: Request):
